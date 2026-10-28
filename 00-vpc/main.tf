@@ -9,6 +9,14 @@ resource "aws_vpc" "main" {
   }
 }
 
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "igw-${var.project}-${var.environment}"
+  }
+}
+
 resource "aws_subnet" "public" {
   count = length(var.public_subnet_cidrs)
 

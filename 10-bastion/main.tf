@@ -23,7 +23,8 @@ resource "aws_security_group" "bastion_sg" {
     cidr_blocks = [local.my_ip]
   }
 }
----------------------------------------
+
+
 resource "aws_instance" "private_ec2" {
   ami                         = var.ami_id
   instance_type               = "t3.micro"

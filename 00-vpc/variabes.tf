@@ -1,11 +1,11 @@
-variable "project" {      #for vpc
-    type = string
-    default = "roboshop"
+variable "project" { #for vpc
+  type    = string
+  default = "roboshop"
 }
 
-variable "environment" {     #for vpc
-    type = string
-    default = "dev"
+variable "environment" { #for vpc
+  type    = string
+  default = "dev"
 }
 
 variable "public_subnet_cidrs" {

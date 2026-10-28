@@ -57,3 +57,37 @@ resource "aws_security_group" "private_ec2_sg" {
     security_groups = [aws_security_group.bastion_sg.id]
   }
 }
+
+
+resource "aws_vpc_security_group_egress_rule" "bastion_ssh_to_private" {
+  security_group_id            = aws_security_group.bastion_sg.id
+  referenced_security_group_id = aws_security_group.private_ec2_sg.id
+
+  ip_protocol = "tcp"
+  from_port   = 22
+  to_port     = 22
+
+  description = "SSH to private EC2"
+}
+
+resource "aws_vpc_security_group_egress_rule" "private_https" {
+  security_group_id = aws_security_group.private_ec2_sg.id
+
+  ip_protocol = "tcp"
+  from_port   = 443
+  to_port     = 443
+  cidr_ipv4   = "0.0.0.0/0"
+
+  description = "HTTPS for package downloads"
+}
+
+resource "aws_vpc_security_group_egress_rule" "private_http" {
+  security_group_id = aws_security_group.private_ec2_sg.id
+
+  ip_protocol = "tcp"
+  from_port   = 80
+  to_port     = 80
+  cidr_ipv4   = "0.0.0.0/0"
+
+  description = "HTTP for package downloads"
+}

@@ -15,5 +15,13 @@ output "private_subnet_ids" {
 }
 
 output "eip" {
-   value = aws_eip.nat_eip.id
+  value = aws_eip.nat_eip.id
+}
+
+output "public_rt" {
+  value = aws_route_table.public_rt
+}
+
+output "private_rt" {
+  value = aws_route_table.private_rt
 }
